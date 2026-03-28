@@ -12,9 +12,9 @@ Abaixo está descrita a finalidade de cada um dos principais arquivos do projeto
 *   **`pipeline_one_at_a_time.py`**: Versão simplificada do pipeline principal, projetada para processar uma única imagem por vez. Ideal para testes rápidos ou integração direta com a API REST, permitindo uma abordagem mais controlada e iterativa.
 ### 🧠 Visão Computacional e Motores de Inteligência Artificial
 *   **`garment_analyzer.py`**: Responsável por "olhar" os pixels visuais e traduzir em características descritas por máquinas através do uso de IA multimodal da Google **(Gemini via Vertex AI)**. Ele decodifica a roupa lendo estilo, silhueta formal, variações tipográficas do tecido ou estampas, devolvendo um resultado em JSON estruturado a ser salvo na nuvem Firestore.
-*   **`comparison_functions.py`**: Módulo dedicado exclusivamente a funções de comparação e cálculo de similaridade. Ele contém algoritmos para comparar as características extraídas das roupas (descrições textuais e vetoriais) e calcular escores de correspondência, utilizando técnicas como similaridade de cossenos para vetores de embeddings.
-*   **`matching_engine.py`**: Motor de correspondência central que integra os resultados do `garment_analyzer` e as funções de comparação para gerar uma lista ordenada de correspondências. Ele consulta o banco de dados mestre, calcula os escores de similaridade e retorna as melhores correspondências para cada peça de roupa analisada.
-*   **`image_vector_embeddings_comparison.py`**: Módulo ainda incompleto, destinado a implementar a comparação de vetores de embeddings de imagens. Ele será responsável por extrair características visuais das roupas e comparar essas características usando técnicas avançadas de machine learning para melhorar a precisão das correspondências.
+*   **`comparison_functions.py`**: Módulo dedicado à lógica de correspondência com base nos atributos textuais extraídos pela IA. Utiliza um algoritmo de pesos dinâmicos que avalia campo a campo (como tipo de peça, caimento e cor), aplicando regras de negócio inteligentes (ex: agrupamento de famílias de cores) para gerar um escore final de similaridade entre as roupas armazenadas no Firestore.
+*   **`matching_engine.py`**: Motor de correspondência alternativo/legado focado no processamento de atributos diretamente via arquivos JSON armazenados no Google Cloud Storage (GCS), gerando os escores com base na interseção de características.
+*   **`image_vector_embeddings_comparison.py`**: Módulo experimental destinado a implementar a comparação visual direta. Ele extrai os vetores numéricos (embeddings) das imagens via Vertex AI e calcula a similaridade de cossenos entre eles, com o objetivo de melhorar a precisão das correspondências no futuro sem depender apenas de texto.
 ### ☁️ Armazenamento, Limpeza de Dados e Utilitários
 *   **`gcs_functions.py`**: Conjunto de funções utilitárias para interagir com o Google Cloud Storage (GCS). Ele inclui funcionalidades para upload, download, listagem e gerenciamento de arquivos e pastas no GCS, facilitando a integração do sistema com a nuvem.
 *   **`removeClothingBackground.py`**: Script dedicado à remoção de fundos de imagens de roupas. Ele utiliza técnicas avançadas de segmentação de imagem para isolar a peça de roupa do plano de fundo, com intuito de melhorar a qualidade dos dados para análise e correspondência. (Esse módulo não aumentou a assertividade do modelo, mas é mantido para fins de comparação e possível uso futuro em casos específicos onde o fundo possa interferir na análise).
@@ -42,6 +42,9 @@ Abaixo está descrita a finalidade de cada um dos principais arquivos do projeto
   <img src="https://github.com/user-attachments/assets/8f8f569a-37c2-4afb-afea-33e6607d6288" width="250"/>
   <img src="https://github.com/user-attachments/assets/3f0551d2-790f-45cc-a198-6b8ab4468034" width="250"/>
 </p>
+
+
+
 
 
 
