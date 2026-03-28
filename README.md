@@ -35,9 +35,13 @@ Abaixo está descrita a finalidade de cada um dos principais arquivos do projeto
 * ⚙️ **Extras** → hashing (MD5) pra evitar duplicados + processamento em memória pra performance.
 * Uso de Embeddings e técnicas de NLP para comparação textual.
 
+**Imagens do funcionamento:**
 
-
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/851fb16c-0fd8-4408-a62d-ad49f8f602c8" width="250"/>
+  <img src="https://github.com/user-attachments/assets/8f8f569a-37c2-4afb-afea-33e6607d6288" width="250"/>
+  <img src="https://github.com/user-attachments/assets/3f0551d2-790f-45cc-a198-6b8ab4468034" width="250"/>
+</p>
 
 
 
